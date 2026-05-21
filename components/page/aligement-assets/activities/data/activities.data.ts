@@ -93,6 +93,45 @@ export const activitiesData: ActivitiesData = {
       }
     },
     {
+      id: 'submit-forum-post',
+      category: 'Knowledge Sharing',
+      activity: 'Submit a High-Quality Forum Post',
+      networkValue: 'Create a thoughtful forum post that contributes meaningful insight, discussion, or value to the broader network.',
+      points: '100+',
+      frequency: 'Repeatable',
+      isAutoTracked: true,
+      popupContent: {
+        title: 'Submit a High-Quality Forum Post',
+        submitButtonText: 'Post in Forum >',
+        ctaLink: 'https://directory.plnetwork.io/forum',
+        description: `Create a thoughtful forum post that contributes meaningful insight, discussion, or value to the broader network. Eligible posts may include project updates, ecosystem learnings, technical writeups, operational playbooks, research, collaboration opportunities, event reflections, ecosystem proposals, or other content that helps members learn from or engage with one another.
+
+To qualify for points, posts should be substantive, clearly written, and designed to generate meaningful discussion rather than simply share a link or announcement. Strong posts typically provide context, explain why the topic matters, invite feedback or collaboration, and contribute something useful back to the network.
+`,
+        links: [
+          { text: 'LabOS Forum', url: 'https://directory.plnetwork.io/forum' }
+        ],
+        pointsAwarded: {
+          title: 'Points Awarded:',
+          items: [
+            {
+              label: 'Base Reward',
+              value: '100 points for publishing a qualifying high-quality forum post.'
+            },
+            {
+              label: 'Engagement Bonus',
+              value: '',
+              valueOnNewLine: true,
+              subItems: [
+                { label: 'Every like or reply to your post', value: '+50 points' }
+              ]
+            }
+          ]
+        },
+        additionalNote: 'Rewards are wholly based on the discretion of the PLAA Working Group. Low-effort posts, promotional spam, duplicate content, or posts lacking meaningful context may not qualify.'
+      }
+    },
+    {
       id: 'contribute-forum-response',
       category: 'Knowledge Sharing',
       activity: 'Contribute a High-Quality Response to the Forum',
@@ -639,5 +678,4 @@ Respond "I'm Going" on the relevant event page via IRL Gatherings before attendi
 
   ]
 };
-
 
