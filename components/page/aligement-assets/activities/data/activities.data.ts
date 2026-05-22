@@ -134,6 +134,38 @@ export const activitiesData: ActivitiesData = {
         additionalNote: 'Rewards are wholly based on the discretion of the PLAA Working Group. Low-effort replies, brief reactions, generic praise, or responses that do not meaningfully advance the conversation are not eligible and may be deleted.'
       }
     },
+    {
+      id: 'submit-high-quality-forum-post',
+      category: 'Knowledge Sharing',
+      activity: 'Submit a High-Quality Forum Post',
+      networkValue: 'Create a thoughtful forum post that contributes meaningful insight, discussion, or value to the broader network.',
+      points: '100+',
+      frequency: 'Repeatable',
+      isAutoTracked: true,
+      popupContent: {
+        title: 'Submit a High-Quality Forum Post',
+        submitButtonText: 'Post in Forum >',
+        ctaLink: 'https://directory.plnetwork.io/forum',
+        description: 'Create a thoughtful forum post that contributes meaningful insight, discussion, or value to the broader network. Eligible posts may include project updates, ecosystem learnings, technical writeups, operational playbooks, research, collaboration opportunities, event reflections, ecosystem proposals, or other content that helps members learn from or engage with one another. To qualify for points, posts should be substantive, clearly written, and designed to generate meaningful discussion rather than simply share a link or announcement. Strong posts typically provide context, explain why the topic matters, invite feedback or collaboration, and contribute something useful back to the network.',
+        links: [
+          { text: 'LabOS Forum', url: 'https://directory.plnetwork.io/forum' }
+        ],
+        pointsAwarded: {
+          title: 'Points Awarded:',
+          items: [
+            {
+              label: 'Base Reward',
+              value: '100 points for publishing a qualifying high-quality forum post.'
+            },
+            {
+              label: 'Engagement Bonus',
+              value: '+50 points for every like or reply to your post.'
+            }
+          ]
+        },
+        additionalNote: 'Low-effort posts, promotional spam, duplicate content, or posts lacking meaningful context may not qualify.'
+      }
+    },
     // {
     //   id: 'create-playbook',
     //   category: 'Knowledge Sharing',
@@ -607,6 +639,57 @@ Respond "I'm Going" on the relevant event page via IRL Gatherings before attendi
             }
           ]
         }
+      }
+    },
+    {
+      id: 'publish-public-security-disclosure',
+      category: 'Network Tooling',
+      activity: 'Publish a Public Security Disclosure',
+      networkValue: 'Strengthen the network by responsibly disclosing a verified vulnerability and the fix that resolved it.',
+      points: '300+',
+      frequency: 'Recurring',
+      verificationType: 'Submission',
+      popupContent: {
+        title: 'Publish a Public Security Disclosure',
+        submitButtonText: 'Share Disclosure >',
+        ctaLink: 'https://directory.plnetwork.io/forum',
+        description: 'Share a public security disclosure that documents a verified vulnerability in a Protocol Labs Network project, library, or piece of shared infrastructure, together with the fix that resolved it. Eligible disclosures may cover open-source repositories used by network members, deployed network services, shared developer tooling, or smart contracts and on-chain components.\n\nTo qualify for points, the underlying issue must already be fixed, the disclosure must be coordinated with the affected maintainers, and the published writeup must be linked from a LabOS Forum post that gives clear context: what the issue was, who it affected, how it was discovered, and what changed to resolve it. The intent is to convert security work that would otherwise stay private into network-wide learning. Disclosures should respect responsible-disclosure norms (no exploitation, no unfixed bugs, no third-party PII).',
+        pointsAwarded: {
+          title: 'Points Awarded:',
+          items: [
+            {
+              label: 'Base Reward',
+              value: '300 points for publishing a qualifying coordinated disclosure with an accompanying LabOS Forum writeup.',
+              subItems: [
+                { label: 'The disclosure must reference a specific Protocol Labs Network repository, deployed service, or shared tool.' },
+                { label: 'The underlying issue must be fixed and acknowledged by the maintainers before publication.' },
+                { label: 'The forum post must include a link to the public writeup and a short summary of what changed.' }
+              ]
+            },
+            {
+              label: 'Severity Bonus',
+              value: '',
+              valueOnNewLine: true,
+              subItems: [
+                { label: 'Low / Informational', value: '+0 points' },
+                { label: 'Medium severity', value: '+150 points' },
+                { label: 'High severity', value: '+400 points' },
+                { label: 'Critical severity', value: '+800 points' },
+                { label: 'Severity is assessed by the PLAA Working Group in consultation with the affected maintainers, using a CVSS-style impact rubric.' }
+              ]
+            },
+            {
+              label: 'Adoption Bonus',
+              value: '',
+              valueOnNewLine: true,
+              subItems: [
+                { label: 'Each downstream project that confirms applying the same fix or hardening pattern', value: '+100 points' },
+                { label: 'Adoption bonuses are calculated only from confirmations posted in the linked forum thread.' }
+              ]
+            }
+          ]
+        },
+        additionalNote: 'Disclosures involving unfixed bugs, third-party PII, or active exploitation are out of scope and will not be awarded points. Reach out to the PLAA Working Group before publishing if you are unsure whether a finding qualifies.'
       }
     },
     {
