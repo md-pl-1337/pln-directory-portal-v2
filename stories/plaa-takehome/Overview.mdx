@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="PLAA Take-home/Overview" />
+
+# PLAA Take-home, Overview
+
+This Storybook bundle is the showcase deliverable that accompanies the take-home PR
+against [`md-pl-1337/pln-directory-portal-v2`](https://github.com/md-pl-1337/pln-directory-portal-v2).
+It renders the components touched by the PR in isolation so a reviewer can sanity-check
+the additions without spinning up the full Next.js dev server.
+
+It is a **personal portfolio piece**, not a parallel deployment of PLAA. The PLAA chrome
+(sidebar, layout wrapper, auth) is intentionally not included; this view focuses purely
+on the components affected by the PR.
+
+## What the PR changes
+
+1. **New activity, Submit a High-Quality Forum Post** (Task 1 of the take-home).
+   Mirrors the existing `contribute-forum-response` shape: same category, frequency,
+   auto-tracked flag, and LabOS Forum CTA.
+
+2. **New activity, Publish a Public Security Disclosure** (additional contribution).
+   Sits in the `Network Tooling` category. Bonus structure: severity tiers
+   (Low → Critical) and a per-downstream-confirmation adoption bonus. Modeled on the
+   existing `share-ai-resource` template's share + drive-discussion + reuse-amplifies-reward
+   pattern.
+
+3. **Sort activities by point value within each frequency section.** Highest-value
+   activities render at the top of each section. The catalog itself stays unordered
+   in the source file so PMs can append new entries in any order they find natural;
+   the UI does the sort at render time.
+
+4. **Task 2, Onboarding page integration scope.** Written up in `TASK-2-SCOPE.md`,
+   not implemented here (the assignment asks for a scope only).
+
+## How to read this Storybook
+
+- **`ActivityTable / FullCatalog`**, the full live catalog, exactly as it would
+  render on `/alignment-asset/activities`. Demonstrates the new sort behavior across
+  every frequency section.
+- **`ActivityTable / KnowledgeSharingOnly` and `NetworkToolingOnly`**, focused views
+  on the categories the new activities live in, so the additions sit next to their
+  natural siblings.
+- **`ActivityTable / SortDemo`**, a hand-crafted three-entry catalog with
+  intentionally out-of-order points to confirm the sort works on common formats
+  (`50`, `200+`, `1,000+`).
+- **`ActivityDetailModal / *`**, each new activity's detail modal, side-by-side with
+  the existing sibling it was modeled on.
+
+## Hard guarantees about the PR diff
+
+- One-component-per-file rule preserved (per repo `AGENTS.md` §15).
+- No new global styles; the new activity entries reuse the existing styled-jsx blocks
+  already in `activity-table.tsx`.
+- No new dependencies.
+- 71 / 71 Curio FULLNODE_API… wrong project. **0 regressions** on the Jest suite
+  (260/260 passing tests still pass; the 1 pre-existing failure on
+  `__tests__/page/founder-guides/request-guide.test.tsx` exists on a clean `main` too).
+- Sort helper is a 4-line pure function (`pointsBase`) and is unit-testable.

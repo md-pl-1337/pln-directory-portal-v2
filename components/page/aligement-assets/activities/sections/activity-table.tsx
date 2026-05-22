@@ -32,10 +32,22 @@ const SECTION_METADATA = [
   }
 ];
 
+// Extract the leading numeric base from a points string for sort ordering.
+// Examples: "100+" -> 100, "500" -> 500, "1,200" -> 1200, "25+" -> 25.
+// Strings that don't begin with digits sort to the bottom (returns -1).
+const pointsBase = (raw: string): number => {
+  const match = raw.replace(/,/g, '').match(/^(\d+)/);
+  return match ? parseInt(match[1], 10) : -1;
+};
+
 export default function ActivityTable({ activities, onRowClick }: ActivityTableProps) {
   const { onActivitiesFormLinkClicked, onActivitiesRowClicked } = useAlignmentAssetsAnalytics();
 
-  // Group activities by frequency
+  // Group activities by frequency, then sort each group by point value
+  // (highest first). The catalog itself stays unordered in the source
+  // file; sorting in the UI keeps the data file editable in any order
+  // PMs find natural while always rendering the highest-impact items at
+  // the top of each section.
   const groupedActivities = activities.reduce((acc, activity) => {
     const freq = activity.frequency || 'Repeatable'; // fallback to Repeatable if missing
     if (!acc[freq]) {
@@ -44,6 +56,10 @@ export default function ActivityTable({ activities, onRowClick }: ActivityTableP
     acc[freq].push(activity);
     return acc;
   }, {} as Record<string, Activity[]>);
+
+  Object.keys(groupedActivities).forEach((freq) => {
+    groupedActivities[freq].sort((a, b) => pointsBase(b.points) - pointsBase(a.points));
+  });
 
   // Manage expanded state for sections (all open by default)
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
